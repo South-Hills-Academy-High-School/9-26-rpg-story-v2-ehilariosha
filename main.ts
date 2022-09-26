@@ -55,6 +55,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         updateChoices()
     }
 })
+/**
+ * START
+ */
 function createConversation () {
     startScript = createScript("Mr. Kao", "IT'S SO HOT! I NEED SOME WATER!", 1)
     nextPage = createScript("Pineapple", "You didn't pay your water bill! Now feel the thunder!", 1)
@@ -96,6 +99,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         printCurrentScript()
     }
 })
+function noMoneyForYou () {
+    noMoneyForYou1 = createScript("Mr. Kao", "Gosh Darn Scum, No More Money For You, NO MORE!", 2)
+    noMoneyForYou2 = createScript("Pineapple", "Let's Meet Each Other Half Way, BOGO Free!", 3)
+    noMoneyForYou3 = createScript("Pineapple", "4$ for 2 Water & Cheetos", 0)
+    blockObject.setAnyProperty(noMoneyForYou1, AnyProp.NextPage, noMoneyForYou2)
+    blockObject.setAnyProperty(noMoneyForYou2, AnyProp.NextPage, noMoneyForYou3)
+    return noMoneyForYou1
+}
 function finalChoice () {
     FinalChoice1 = createScript("Old Man", "Well, I just need enough water for this garden here", 0)
     FinalChoice2 = createScript("Cloud", "I can make that happen! What's the magic word?", 0)
@@ -140,10 +151,11 @@ function printCurrentScript () {
 }
 function imAnOldMan () {
     oldman1 = createScript("Mr. Kao", "I'm just an old man and I spent all my money gambling, please help me!!!", 3)
-    oldman2 = createScript("Pineapple", "OK, just give me $2 and I will get you water", 3)
+    oldman2 = createScript("Pineapple", "OK, just give me $2 & I will get you water", 3)
     blockObject.setAnyProperty(oldman1, AnyProp.NextPage, oldman2)
     blockObject.setStringArrayProperty(oldman2, StrArrayProp.Choices, ["OK here's $2!", "NO MONEY FOR YOU!!"])
     blockObject.setAnyProperty(oldman2, AnyProp.Choice1, happyEnding())
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice2, noMoneyForYou())
     return oldman1
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -165,6 +177,9 @@ let oldman1: blockObject.BlockObject = null
 let printingStuff = false
 let FinalChoice2: blockObject.BlockObject = null
 let FinalChoice1: blockObject.BlockObject = null
+let noMoneyForYou3: blockObject.BlockObject = null
+let noMoneyForYou2: blockObject.BlockObject = null
+let noMoneyForYou1: blockObject.BlockObject = null
 let makingChoice = false
 let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
