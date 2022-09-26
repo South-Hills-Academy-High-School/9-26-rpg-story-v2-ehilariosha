@@ -34,10 +34,10 @@ namespace AnyProp {
 // 
 // 3 = happy
 function happyEnding () {
-    happy1 = createScript("Cloud", "That's right! Such a polite young man!", 0)
-    happy2 = createScript("Old Man", "HaHaHa! What a flatterer. Take this flower as a token of my gratitude.", 3)
-    happy3 = createScript("Cloud", "Oh, it's beautiful! Needs some water though.", 4)
-    happy4 = createScript("Old Man", "Alright....", 1)
+    happy1 = createScript("Pineapple", "That's right! Such a polite young man!", 0)
+    happy2 = createScript("Mr. Kao", "HaHaHa! What a flatterer. Take this flower as a token of my gratitude.", 3)
+    happy3 = createScript("Pineapple", "Oh, it's beautiful! Needs some water though.", 4)
+    happy4 = createScript("Mr. Kao", "Alright....", 1)
     blockObject.setAnyProperty(happy1, AnyProp.NextPage, happy2)
     blockObject.setAnyProperty(happy2, AnyProp.NextPage, happy3)
     blockObject.setAnyProperty(happy3, AnyProp.NextPage, happy4)
@@ -49,7 +49,16 @@ function imSorry () {
     imSorry3 = createScript("Mr. Kao", "AHHHHHH!!! GOVERNMENT LACKEY!!!", 4)
     blockObject.setAnyProperty(imSorry1, AnyProp.NextPage, imSorry2)
     blockObject.setAnyProperty(imSorry2, AnyProp.NextPage, imSorry3)
+    blockObject.setAnyProperty(imSorry3, AnyProp.NextPage, finalChoice())
     return imSorry1
+}
+function buzzOff () {
+    buzzOff1 = createScript("Mr. Kao", "Buzz Off! I Don't Take Orders From You!", 2)
+    buzzOff2 = createScript("Pineapple", "Fine Then, This Is The Product Of Your Stubbornness! Perish!", 4)
+    buzzOff3 = createScript("Mr. Kao", "AHHH!!! OUCH! LETS GO BRANDON!!!", 4)
+    blockObject.setAnyProperty(buzzOff1, AnyProp.NextPage, buzzOff2)
+    blockObject.setAnyProperty(buzzOff2, AnyProp.NextPage, buzzOff3)
+    return buzzOff1
 }
 // microsoft/arcade-block-objects
 // 
@@ -113,12 +122,12 @@ function noMoneyForYou () {
     return noMoneyForYou1
 }
 function finalChoice () {
-    FinalChoice1 = createScript("Old Man", "Well, I just need enough water for this garden here", 0)
-    FinalChoice2 = createScript("Cloud", "I can make that happen! What's the magic word?", 0)
+    FinalChoice1 = createScript("Mr. Kao", "Well, I just need enough water for this garden here", 0)
+    FinalChoice2 = createScript("Pineapple", "I can make that happen! What's the magic word?", 0)
     blockObject.setAnyProperty(FinalChoice1, AnyProp.NextPage, FinalChoice2)
     blockObject.setStringArrayProperty(FinalChoice2, StrArrayProp.Choices, ["Please!", "Abracadabra!"])
     blockObject.setAnyProperty(FinalChoice2, AnyProp.Choice1, happyEnding())
-    blockObject.setAnyProperty(FinalChoice2, AnyProp.Choice2, 0)
+    blockObject.setAnyProperty(FinalChoice2, AnyProp.Choice2, buzzOff())
     return FinalChoice1
 }
 function updateChoices () {
@@ -190,6 +199,9 @@ let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
 let startScript: blockObject.BlockObject = null
 let choiceIndex = 0
+let buzzOff3: blockObject.BlockObject = null
+let buzzOff2: blockObject.BlockObject = null
+let buzzOff1: blockObject.BlockObject = null
 let imSorry3: blockObject.BlockObject = null
 let imSorry2: blockObject.BlockObject = null
 let imSorry1: blockObject.BlockObject = null
