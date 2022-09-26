@@ -44,7 +44,12 @@ function happyEnding () {
     return happy1
 }
 function imSorry () {
-	
+    imSorry1 = createScript("Mr. Kao", "I'm Sorry :( , The Money The Government Gives Me Is not Enough For My Personal & Bills Expensese.", 1)
+    imSorry2 = createScript("Pineapple", "I'VE HAD IT WITH YOUR LIES! FEEL MY WRATH, THE POWER OF GAVIN NEWSOM CONDEMENDS YOU!", 1)
+    imSorry3 = createScript("Mr. Kao", "AHHHHHH!!! GOVERNMENT LACKEY!!!", 4)
+    blockObject.setAnyProperty(imSorry1, AnyProp.NextPage, imSorry2)
+    blockObject.setAnyProperty(imSorry2, AnyProp.NextPage, imSorry3)
+    return imSorry1
 }
 // microsoft/arcade-block-objects
 // 
@@ -64,7 +69,7 @@ function createConversation () {
     blockObject.setAnyProperty(startScript, AnyProp.NextPage, nextPage)
     blockObject.setStringArrayProperty(nextPage, StrArrayProp.Choices, ["I'm an old man!", "I'm sorry :("])
     blockObject.setAnyProperty(nextPage, AnyProp.Choice1, imAnOldMan())
-    blockObject.setAnyProperty(nextPage, AnyProp.Choice2, 0)
+    blockObject.setAnyProperty(nextPage, AnyProp.Choice2, imSorry())
     currentScript = startScript
 }
 function printScript (name: string, text: string, portrait: number) {
@@ -102,7 +107,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 function noMoneyForYou () {
     noMoneyForYou1 = createScript("Mr. Kao", "Gosh Darn Scum, No More Money For You, NO MORE!", 2)
     noMoneyForYou2 = createScript("Pineapple", "Let's Meet Each Other Half Way, BOGO Free!", 3)
-    noMoneyForYou3 = createScript("Pineapple", "4$ for 2 Water & Cheetos", 0)
+    noMoneyForYou3 = createScript("Pineapple", "4$ for 2 Water & Cheetos.", 0)
     blockObject.setAnyProperty(noMoneyForYou1, AnyProp.NextPage, noMoneyForYou2)
     blockObject.setAnyProperty(noMoneyForYou2, AnyProp.NextPage, noMoneyForYou3)
     return noMoneyForYou1
@@ -185,6 +190,9 @@ let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
 let startScript: blockObject.BlockObject = null
 let choiceIndex = 0
+let imSorry3: blockObject.BlockObject = null
+let imSorry2: blockObject.BlockObject = null
+let imSorry1: blockObject.BlockObject = null
 let happy4: blockObject.BlockObject = null
 let happy3: blockObject.BlockObject = null
 let happy2: blockObject.BlockObject = null
